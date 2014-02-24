@@ -15,7 +15,50 @@ describe("Triangle", function() {
       testTriangle.side3 = 7;
       testTriangle.invalid().should.equal(false);
     });
+
+    it("should return false if the sides are 2, 10, 11", function() {
+      var testTriangle = Object.create(Triangle);
+      testTriangle.side1 = 2;
+      testTriangle.side2 = 10;
+      testTriangle.side3 = 11;
+      testTriangle.invalid().should.equal(false);
+    });
   });
+
+  describe("badSide", function() {
+    it("should return true for a triangle with zero or negative side length", function() {
+      var testTriangle = Object.create(Triangle);
+      testTriangle.side1 = -1;
+      testTriangle.side2 = 10;
+      testTriangle.side3 = 11;
+      testTriangle.badSide().should.equal(true);
+    });
+    it("should return false for a triangle without zero or negative side length", function() {
+      var testTriangle = Object.create(Triangle);
+      testTriangle.side1 = 100;
+      testTriangle.side2 = 10;
+      testTriangle.side3 = 11;
+      testTriangle.badSide().should.equal(false);
+    });
+  })
+
+
+  describe("badSideRatio", function() {
+    it("should return true a set of sides with one side too long to make a triangle with the other two", function() {
+      var testTriangle = Object.create(Triangle);
+      testTriangle.side1 = 100;
+      testTriangle.side2 = 10;
+      testTriangle.side3 = 11;
+      testTriangle.badSideRatio().should.equal(true);
+    });
+    it("should return false for a triangle with no side too long to make a triangle with the other two sides", function() {
+      var testTriangle = Object.create(Triangle);
+      testTriangle.side1 = 10;
+      testTriangle.side2 = 10;
+      testTriangle.side3 = 11;
+      testTriangle.badSideRatio().should.equal(false);
+    });
+  })
 
   describe("type", function() {
     it("should return equilateral if all three sides are equal", function() {
