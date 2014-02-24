@@ -1,12 +1,3 @@
-#show-triangle {
+.result {
   display: none;
-}
-
-.triangle {
-  cursor: pointer;
-  color: #08c;
-}
-
-.triangle:hover {
-  text-decoration: underline;
 }

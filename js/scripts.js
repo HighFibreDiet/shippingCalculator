@@ -23,33 +23,43 @@ var Package = {
   },
 
   shippingCost: function() {
-    var rate = this.shippingRate();
+    var rate = parseFloat(this.shippingRate());
     var baseRate = 3 + this.pickUp;
     return (rate * this.weight) + baseRate;
   }
 };
 
 $(document).ready(function() {
-  $("form#new-triangle").submit(function(event) {
+  $("form#new-shipment").submit(function(event) {
     event.preventDefault();
 
-    var inputtedSide1 = parseFloat($("input#new-side1").val());
-    var inputtedSide2 = parseFloat($("input#new-side2").val());
-    var inputtedSide3 = parseFloat($("input#new-side3").val());
-    var newTriangle = Object.create(Triangle);
-    newTriangle.side1 = inputtedSide1;
-    newTriangle.side2 = inputtedSide2;
-    newTriangle.side3 = inputtedSide3;
+    var originCountry = $("select#origin-country").val();
+    var originZipCode = $("input#origin-zip").val();
+    var destinationCountry = $("select#destination-country").val();
+    var destinationZipCode = $("input#destination-zip").val();
+    var shippingSpeed = $("select#shipping-speed").val();
+    var pickUp = parseInt($("select#pick-up").val());
+    var weight = parseFloat($("input#weight").val());
+    var newPackage = Object.create(Package);
 
-    if(!newTriangle.invalid()) {
-      var resultType = newTriangle.type();
-    
-      $("ul#" + resultType).append("<li><span class='" + resultType + "'>" 
-          + newTriangle.side1 + ", " 
-          + newTriangle.side2 + ", " 
-          + newTriangle.side3 + "</span></li>");
+    newPackage.originCountry = originCountry;
+    newPackage.originZipCode = originZipCode;
+    newPackage.destinationCountry = destinationCountry;
+    newPackage.destinationZipCode = destinationZipCode;
+    newPackage.pickUp = pickUp;
+    newPackage.weight = weight;
+    newPackage.shippingSpeed = shippingSpeed;
+
+    console.log(weight);
+
+    if(originCountry === "USA" && destinationCountry === "USA" && (originZipCode.length != 5 || destinationZipCode.length != 5)){
+      alert("US Zip Codes must be 5 digits long! Please check your values and reenter.");
+    } else if (isNaN(weight)) {
+      alert("Weight must be entered as a number! Please check your value and reenter.");
     } else {
-      alert('Please enter a valid triangle!')
+      var shippingCost = newPackage.shippingCost();
+      $(".result").show();
+      $("span.cost").text("$" + shippingCost);
     }
 
     this.reset();
