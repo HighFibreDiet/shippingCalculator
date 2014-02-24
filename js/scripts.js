@@ -1,6 +1,6 @@
 var Triangle = {
   invalid: function() {
-    return (this.side1 >= this.side2 + this.side3 || this.side2 >= this.side1 + this.side3 || this.side3 >= this.side1 + this.side2);
+    return ( this.side1 <= 0 || this.side2 <= 0 || this.side3 <= 0 || this.side1 >= this.side2 + this.side3 || this.side2 >= this.side1 + this.side3 || this.side3 >= this.side1 + this.side2);
   },
 
   type: function() {
