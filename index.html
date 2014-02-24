@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-1.11.0.js"></script>
+    <script src="js/scripts.js"></script>
+    <title>Scrabble</title>
+  </head>
+  <body class = "scrabble">
+    <div class="container">
+      <h1>Score your Word</h1>
+
+      <form id="wordCheck">
+        <div class="form-group">
+          <label for="word" class = "form-label">Enter your word to score </label>
+          <input class = "form-control" id="word" type="text" placeholder = "Scrabble word">
+        </div>
+
+        <button type="submit" class="btn" id = "submit-button" >Score!</button>
+      </form>
+      <div id = "result">
+        <span class = "result"></span>
+      </div>
+   </div>
+  </body>
+</html>
