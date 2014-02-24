@@ -1,12 +1,12 @@
-#show-contact {
+#show-triangle {
   display: none;
 }
 
-.contact {
+.triangle {
   cursor: pointer;
   color: #08c;
 }
 
-.contact:hover {
+.triangle:hover {
   text-decoration: underline;
 }
